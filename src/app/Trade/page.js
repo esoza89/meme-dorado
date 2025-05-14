@@ -157,8 +157,7 @@ const TradePage = ()=> {
       setProvider(provider)
       const network = await provider.getNetwork()
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-      const account = ethers.getAddress(accounts[0])
-      const signer = await provider.getSigner()
+      account = ethers.getAddress(accounts[0])
       setAccount(account)
       const factoryAddress = config[network.chainId].factory.address
       const factory = new ethers.Contract(factoryAddress, Factory, provider)

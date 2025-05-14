@@ -1,7 +1,7 @@
 'use client'
 import { ethers } from "ethers"
-import { useEffect, useState } from "react"
-import { useSelector, useDispatch } from 'react-redux';
+import { useState } from "react"
+import { useDispatch } from 'react-redux';
 import { addToken } from '../store/tokensSlice';
 
 
