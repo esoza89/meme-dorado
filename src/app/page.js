@@ -32,7 +32,7 @@ export default function Home() {
   };
 
   async function toggleCreate() {
-    showCreate ? setShowCreate(false) : setShowCreate(true)
+    setShowCreate((prev) => !prev);
   }
 
   const openInNewTab = () => {
@@ -99,7 +99,7 @@ export default function Home() {
       }, 5000);
       return () => clearInterval(interval);
     }
-  }, [isToggled, tokens])
+  }, [isToggled, tokens, loadBlockchainData])
 
 
   return (

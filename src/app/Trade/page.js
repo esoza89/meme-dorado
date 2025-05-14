@@ -9,6 +9,8 @@ import ProgressBar from "../components/ProgressBar"
 import PriceHistoryChart from '../components/PriceHistoryChart';
 import { useSelector, useDispatch} from 'react-redux';
 import { addTrade } from "../store/tokensSlice"
+import Image from 'next/image';
+
 
 
 const TradePage = ()=> {
@@ -157,7 +159,7 @@ const TradePage = ()=> {
       setProvider(provider)
       const network = await provider.getNetwork()
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-      account = ethers.getAddress(accounts[0])
+      const account = ethers.getAddress(accounts[0])
       setAccount(account)
       const factoryAddress = config[network.chainId].factory.address
       const factory = new ethers.Contract(factoryAddress, Factory, provider)
@@ -218,7 +220,7 @@ const TradePage = ()=> {
       <h1>trade</h1>
 
       <div className="token__details">
-        <img src={token.image} alt="token image" width={156} height={156} />
+        <Image src={token.image} alt="token image" width={156} height={156} />
         <p>creado por {token.creator.slice(0, 6) + '...' + token.creator.slice(38, 42)}</p>
         <p>{token.crtMsg}</p>
         <p>Market Cap: {Number(ethers.formatUnits(token.raised, 18)).toFixed(18)} ETH</p>
