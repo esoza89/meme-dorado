@@ -15,9 +15,7 @@ import config from "../config.json"
 
 const ListaPage = ()=> {
 
-  const [provider, setProvider] = useState(null)
   const [account, setAccount] = useState(null)
-  const [factory, setFactory] = useState(null)
   const [tokens, setTokens] = useState([])
   const [isToggled, setIsToggled] = useState(true);  
 
@@ -30,7 +28,6 @@ const ListaPage = ()=> {
   async function loadBlockchainData() {
     if (typeof window.ethereum !== 'undefined') {
       const provider = new ethers.BrowserProvider(window.ethereum)
-      setProvider(provider)
 
       const network = await provider.getNetwork()
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
@@ -38,7 +35,6 @@ const ListaPage = ()=> {
       setAccount(account)
       const factoryAddress = config[network.chainId].factory.address
       const factory = new ethers.Contract(factoryAddress, Factory, provider)
-      setFactory(factory)
 
       const totalTokens = await factory.totalTokens()
       const totalTokensNumber = Number(totalTokens)
@@ -74,7 +70,7 @@ const ListaPage = ()=> {
       }, 5000);
       return () => clearInterval(interval);
     }
-  }, [isToggled, tokens, loadBlockchainData])
+  }, [isToggled, tokens])
 
   return (
     <div className="page">

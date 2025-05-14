@@ -26,7 +26,6 @@ const TradePage = ()=> {
   let [tokenFid, setTokenFid] = useState(0);
   let [token, setToken] = useState(null);
   const [provider, setProvider] = useState(null)
-  const [account, setAccount] = useState(null)
   const [factory, setFactory] = useState(null)
   const [isLoading, setIsLoading] = useState(true);
   const [priceHistory, setPriceHistory] = useState([]);
@@ -160,7 +159,6 @@ const TradePage = ()=> {
       const network = await provider.getNetwork()
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
       const account = ethers.getAddress(accounts[0])
-      setAccount(account)
       const factoryAddress = config[network.chainId].factory.address
       const factory = new ethers.Contract(factoryAddress, Factory, provider)
       setFactory(factory)

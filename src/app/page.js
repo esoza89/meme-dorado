@@ -99,7 +99,7 @@ export default function Home() {
       }, 5000);
       return () => clearInterval(interval);
     }
-  }, [isToggled, tokens, loadBlockchainData])
+  }, [isToggled, tokens])
 
 
   return (
