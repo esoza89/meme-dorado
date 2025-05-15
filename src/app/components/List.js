@@ -58,19 +58,37 @@ function List({ toggleCreate, fee, provider, factory }) {
       await transaction.wait()
       const totalTokens = await factory.totalTokens()
       const tokenID = Number(totalTokens) - 1
-      dispatch(
-        addToken({
-          id: tokenID,
-          imageURL: image,
-          creatorMessage: creatorMessage,
-          socialMediaLinks: {
-            rSocial1: rSocial1,
-            rSocial2: rSocial2,
+
+      const tokenData = {
+        id: tokenID,
+        imageURL: image,
+        creatorMessage: creatorMessage,
+        socialMediaLinks: {
+          rSocial1: rSocial1,
+          rSocial2: rSocial2,
+        },
+        comments: [],
+        trades: [],
+        createdAt: new Date().toISOString(),
+      };
+
+    dispatch(addToken(tokenData));
+
+      try {
+        const response = await fetch('/api/coins', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
           },
-          comments: [],
-          trades: [],
-        })
-      );
+          body: JSON.stringify(tokenData)
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to save coin data to the database');
+        }
+      } catch (error) {
+        console.error('Error saving coin data:', error);
+      }
 
       toggleCreate()
     }
