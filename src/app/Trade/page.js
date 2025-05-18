@@ -87,6 +87,19 @@ const TradePage = ()=> {
         trade: finalPriceFormatted
       })
     )
+
+    const response = await fetch(`/api/coins/${tokenFid}/trades`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ price: parseFloat(finalPriceFormatted) })
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to save coin data to the database');
+    }
+
     window.location.reload();
   }
 
@@ -144,6 +157,19 @@ const TradePage = ()=> {
         trade: finalPriceFormatted
       })
     )
+
+    const response = await fetch(`/api/coins/${tokenFid}/trades`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ price: parseFloat(finalPriceFormatted) })
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to save coin data to the database');
+    }
+
     window.location.reload();
   }
 
@@ -168,24 +194,35 @@ const TradePage = ()=> {
 
       let tokenSale = await factory.getTokenSale(tokenFid)
 
+      const response = await fetch(`/api/coins2/${tokenFid}`);
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+        const data = await response.json();
+        const imageLink = data.imageURL;
+        const creatorMsg = data.creatorMessage;
+        const dbSocial1 = data.Social1 || null;
+        const dbSocial2 = data.Social2 || null;
+        const dbTrades = data.trades;
+
       token = {
           token: tokenSale.token,
           name: tokenSale.name,
           creator: tokenSale.creator,
-          crtMsg: tokensState[tokenFid]?.creatorMessage,
+          crtMsg: creatorMsg,
           sold: tokenSale.sold,
           raised: tokenSale.raised,
           isOpen: tokenSale.isOpen,
-          image: tokensState[tokenFid]?.imageURL,
+          image: imageLink,
           fId: tokenFid,
-          rSocial1: tokensState[tokenFid]?.socialMediaLinks?.rSocial1 || null,
-          rSocial2: tokensState[tokenFid]?.socialMediaLinks?.rSocial2 || null,
+          rSocial1: dbSocial1,
+          rSocial2: dbSocial2,
       }
       setToken(token)
       const priceD = await factory.getPrice(token.sold)
       setPrice(priceD)
 
-      const trades = tokensState[tokenFid]?.trades || []
+      const trades = dbTrades
       const priceHistoryD = trades.slice(-75) || []
       setPriceHistory(priceHistoryD)
 

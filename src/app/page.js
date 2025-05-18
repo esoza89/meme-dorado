@@ -22,7 +22,7 @@ export default function Home() {
   const [showCreate, setShowCreate] = useState(false)
   const [tokens, setTokens] = useState([])
   const [tokensTop, setTokensTop] = useState([])
-  const [isToggled, setIsToggled] = useState(true);  
+  const [isToggled, setIsToggled] = useState(true);
 
   const tokensState = useSelector((state) => state.tokens.tokens);
 
@@ -55,10 +55,18 @@ export default function Home() {
       const totalTokens = await factory.totalTokens()
       const totalTokensNumber = Number(totalTokens)
       const tokens = []
-      const startIndex = Math.min(totalTokensNumber - 1, 49)
+      const startIndex = totalTokensNumber - 1
       
-      for (let i = startIndex; i >= 0 && i >= totalTokensNumber - 50; i--) {
+      for (let i = startIndex; i >= 0 && i >= totalTokensNumber - 25; i--) {
         const tokenSale = await factory.getTokenSale(i)
+
+        const response = await fetch(`/api/coins/${i}`);
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+        let data = await response.json();
+        let imageLink = data.imageURL;
+
 
         const token = {
           token: tokenSale.token,
@@ -67,7 +75,7 @@ export default function Home() {
           sold: tokenSale.sold,
           raised: tokenSale.raised,
           isOpen: tokenSale.isOpen,
-          image: tokensState[i]?.imageURL,
+          image: imageLink,
           fId: i
         }
       

@@ -44,6 +44,13 @@ const ListaPage = ()=> {
       for (let i = totalTokensNumber-1; i >= 0; i--) {
         const tokenSale = await factory.getTokenSale(i)
 
+        const response = await fetch(`/api/coins/${i}`);
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+        let data = await response.json();
+        let imageLink = data.imageURL;
+
         const token = {
           token: tokenSale.token,
           name: tokenSale.name,
@@ -51,7 +58,7 @@ const ListaPage = ()=> {
           sold: tokenSale.sold,
           raised: tokenSale.raised,
           isOpen: tokenSale.isOpen,
-          image: tokensState[i]?.imageURL,
+          image: imageLink,
           fId: i
         }
       
@@ -93,7 +100,7 @@ const ListaPage = ()=> {
               {!account ? (
                 <p>conecta la cuenta</p>
               ) : tokens.length === 0 ? (
-                <p>no hay meme monedas</p>
+                <p>cargando ...</p>
               ) : (
                 tokens.map((token, index) => (
                   <Token
