@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import { ethers } from 'ethers'
-import { useSelector} from 'react-redux';
 
 
 // Components
@@ -19,7 +18,6 @@ const ListaPage = ()=> {
   const [tokens, setTokens] = useState([])
   const [isToggled, setIsToggled] = useState(true);  
 
-  const tokensState = useSelector((state) => state.tokens.tokens);
 
   const handleToggle = () => {
     setIsToggled((prev) => !prev);

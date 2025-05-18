@@ -7,8 +7,6 @@ import config from "../config.json"
 import Factory from "../abis/Factory.json"
 import ProgressBar from "../components/ProgressBar"
 import PriceHistoryChart from '../components/PriceHistoryChart';
-import { useSelector, useDispatch} from 'react-redux';
-import { addTrade } from "../store/tokensSlice"
 import Image from 'next/image';
 
 
@@ -29,9 +27,6 @@ const TradePage = ()=> {
   const [factory, setFactory] = useState(null)
   const [isLoading, setIsLoading] = useState(true);
   const [priceHistory, setPriceHistory] = useState([]);
-
-  const dispatch = useDispatch();
-  let tokensState = useSelector((state) => state.tokens.tokens);  
 
   const stimateCostB = async (event) => {
     setAmountBValue(event.target.value)
@@ -81,12 +76,6 @@ const TradePage = ()=> {
 
     const finalPrice = await factory.getPrice(sold + amountB)
     const finalPriceFormatted = Number(ethers.formatUnits(finalPrice, 18))
-    dispatch(
-      addTrade({
-        tokenId: tokenFid,
-        trade: finalPriceFormatted
-      })
-    )
 
     const response = await fetch(`/api/coins/${tokenFid}/trades`, {
       method: 'POST',
@@ -151,12 +140,6 @@ const TradePage = ()=> {
 
     const finalPrice = await factory.getPrice(sold - amountS)
     const finalPriceFormatted = Number(ethers.formatUnits(finalPrice, 18))
-    dispatch(
-      addTrade({
-        tokenId: tokenFid,
-        trade: finalPriceFormatted
-      })
-    )
 
     const response = await fetch(`/api/coins/${tokenFid}/trades`, {
       method: 'POST',

@@ -1,8 +1,6 @@
 'use client'
 import { ethers } from "ethers"
 import { useState } from "react"
-import { useDispatch } from 'react-redux';
-import { addToken } from '../store/tokensSlice';
 
 
 function List({ toggleCreate, fee, provider, factory }) {
@@ -10,7 +8,6 @@ function List({ toggleCreate, fee, provider, factory }) {
   const [url, setUrl] = useState("");
   const [uploading, setUploading] = useState(false);
 
-  const dispatch = useDispatch();
   const [toastC, setToastC] = useState(null);
 
   const uploadFile = async () => {
@@ -71,8 +68,6 @@ function List({ toggleCreate, fee, provider, factory }) {
         trades: [],
         createdAt: new Date().toISOString(),
       };
-
-    dispatch(addToken(tokenData));
 
       try {
         const response = await fetch('/api/coins', {

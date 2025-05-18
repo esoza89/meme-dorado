@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import { ethers } from 'ethers'
-import { useSelector} from 'react-redux';
 
 // Components
 import Header from "./components/Header"
@@ -24,9 +23,6 @@ export default function Home() {
   const [tokensTop, setTokensTop] = useState([])
   const [isToggled, setIsToggled] = useState(true);
 
-  const tokensState = useSelector((state) => state.tokens.tokens);
-
-  
   const handleToggle = () => {
     setIsToggled((prev) => !prev);
   };
