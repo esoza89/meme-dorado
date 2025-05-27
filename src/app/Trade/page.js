@@ -267,7 +267,7 @@ const TradePage = ()=> {
           <p className="disclaimer">¡Objetivo alcanzado!</p>
           <p>
               <a 
-                href={`https://app.uniswap.org/explore/tokens/unichain/${token.token}`} 
+                href={`https://app.uniswap.org/explore/tokens/base/${token.token}`} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="link"
