@@ -13,6 +13,7 @@ const AcercaPage = () => {
                 <p className="token__details">
                     meme dorado es una aplicación que te permite participar en el emocionante mundo de las criptomonedas y meme monedas de manera sencilla y segura. Imagina que es como una tienda donde puedes crear, comprar y vender tokens, pero con un toque especial: ¡todo está automatizado y respaldado por contratos inteligentes!
                 </p>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/Zu0CN4iNOH4?si=vLUA4ERC59MQEsdo" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
 
                 <h2 className="text-2xl font-bold mb-4">🔐 Seguridad con Smart Contracts</h2>
                 <p className="token__details">
