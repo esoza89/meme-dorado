@@ -39,61 +39,67 @@ export default function Home() {
     if (typeof window.ethereum !== 'undefined') {
       const provider = new ethers.BrowserProvider(window.ethereum)
       setProvider(provider)
-
-      const network = await provider.getNetwork()
-      const factoryAddress = config[network.chainId].factory.address
-      const factory = new ethers.Contract(factoryAddress, Factory, provider)
-      setFactory(factory)
-
-      const fee = await factory.fee()
-      setFee(fee)
-
-      const totalTokens = await factory.totalTokens()
-      const totalTokensNumber = Number(totalTokens)
-      const tokens = []
-      const startIndex = totalTokensNumber - 1
-      
-      for (let i = startIndex; i >= 0 && i >= totalTokensNumber - 25; i--) {
-        const tokenSale = await factory.getTokenSale(i)
-
-        const response = await fetch(`/api/coins/${i}`);
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
-        }
-        let data = await response.json();
-        let imageLink = data.imageURL;
-
-
-        const token = {
-          token: tokenSale.token,
-          name: tokenSale.name,
-          creator: tokenSale.creator,
-          sold: tokenSale.sold,
-          raised: tokenSale.raised,
-          isOpen: tokenSale.isOpen,
-          image: imageLink,
-          fId: i
-        }
-      
-        tokens.push(token)
-      }
-
-      setTokens(tokens)
-
-      const sortedTokens = [...tokens].sort((a, b) => {
-        if (a.isOpen && !b.isOpen) return -1;
-        if (!a.isOpen && b.isOpen) return 1;
-        
-        if (b.sold > a.sold) return 1;
-        if (b.sold < a.sold) return -1;
-        
-        return 0;
-      });
-    
-      const top5Tokens = sortedTokens.slice(0, 5);
-      setTokensTop(top5Tokens);
-
     }
+    
+    const rpcUrl = process.env.NEXT_PUBLIC_INFURA_RPC_URL;
+    const providerRead = new ethers.JsonRpcProvider(rpcUrl);
+    
+    console.log("Provider Read:", providerRead);
+    const network = await providerRead.getNetwork()
+    const factoryAddress = config[network.chainId].factory.address
+    console.log("Factory Address:", factoryAddress);
+    const factory = new ethers.Contract(factoryAddress, Factory, providerRead)
+    setFactory(factory)
+
+    const fee = await factory.fee()
+    setFee(fee)
+
+    const totalTokens = await factory.totalTokens()
+    const totalTokensNumber = Number(totalTokens)
+    const tokens = []
+    const startIndex = totalTokensNumber - 1
+    
+    for (let i = startIndex; i >= 0 && i >= totalTokensNumber - 25; i--) {
+      const tokenSale = await factory.getTokenSale(i)
+
+      const response = await fetch(`/api/coins/${i}`);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      let data = await response.json();
+      let imageLink = data.imageURL;
+
+
+      const token = {
+        token: tokenSale.token,
+        name: tokenSale.name,
+        creator: tokenSale.creator,
+        sold: tokenSale.sold,
+        raised: tokenSale.raised,
+        isOpen: tokenSale.isOpen,
+        image: imageLink,
+        fId: i
+      }
+    
+      tokens.push(token)
+    }
+
+    setTokens(tokens)
+
+    const sortedTokens = [...tokens].sort((a, b) => {
+      if (a.isOpen && !b.isOpen) return -1;
+      if (!a.isOpen && b.isOpen) return 1;
+      
+      if (b.sold > a.sold) return 1;
+      if (b.sold < a.sold) return -1;
+      
+      return 0;
+    });
+  
+    const top5Tokens = sortedTokens.slice(0, 5);
+    setTokensTop(top5Tokens);
+
+    
   }
 
   useEffect(() => {
@@ -135,12 +141,9 @@ export default function Home() {
         <div className="listings">
           <h1>monedas en tendencia</h1>
             <div className="tokens">
-              {!account ? (
-                <p>conecta la cuenta</p>
-              ) : tokensTop.length === 0 ? (
+              {tokens.length === 0 ? (
                 <p>cargando...</p>
-              ) : (
-                tokensTop.map((token, index) => (
+              ) : (tokensTop.map((token, index) => (
                   <Token
                     token={token}
                     key={index}
@@ -154,9 +157,7 @@ export default function Home() {
         <div className="listings">
           <h1>nuevas monedas</h1>
             <div className="tokens">
-              {!account ? (
-                <p>conecta la cuenta</p>
-              ) : tokens.length === 0 ? (
+              {tokens.length === 0 ? (
                 <p>cargando...</p>
               ) : (
                 tokens.map((token, index) => (
@@ -170,9 +171,14 @@ export default function Home() {
         </div>
 
         <div className="create">
-          <button onClick={openInNewTab} className="btn--fancy">
-            [ todas las monedas ]
-          </button>
+          {!account ? (
+            <p>conecta tu billetera para ver todas las monedas</p>
+          ) : (
+            <button onClick={openInNewTab} className="btn--fancy">
+              [ ver todas las monedas ]
+            </button>
+          )}
+          
         </div>
 
       </main>
