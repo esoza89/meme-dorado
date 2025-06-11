@@ -236,7 +236,13 @@ const TradePage = ()=> {
       <h1>trade</h1>
 
       <div className="token__details">
-        <Image src={token.image} alt="token image" width={156} height={156} />
+        <a
+          href={`https://basescan.org/address/${token.token}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image src={token.image} alt="token image" width={250} height={250} />
+        </a>
         <p>creado por {token.creator.slice(0, 6) + '...' + token.creator.slice(38, 42)}</p>
         <p>{token.crtMsg}</p>
         <p>Market Cap: {Number(ethers.formatUnits(token.raised, 18)).toFixed(18)} ETH</p>
