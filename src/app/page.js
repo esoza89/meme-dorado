@@ -120,9 +120,9 @@ export default function Home() {
         <div className="create">
           <button onClick={factory && account && toggleCreate} className="btn--fancy">
             {!factory ? (
-              "[ conecta la billetera ]"
+              "[ conecta la billetera para crear meme monedas y hacer trading ]"
             ) : !account ? (
-              "[ conecta la billetera ]"
+              "[ conecta la billetera para crear meme monedas y hacer trading ]"
             ) : (
               "[ crea una meme moneda ]"
             )}
@@ -147,6 +147,7 @@ export default function Home() {
                   <Token
                     token={token}
                     key={index}
+                    account={account}
                   />
                 ))
               )}
@@ -164,6 +165,7 @@ export default function Home() {
                   <Token
                     token={token}
                     key={index}
+                    account={account}
                   />
                 ))
               )}
