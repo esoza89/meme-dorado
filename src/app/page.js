@@ -22,6 +22,8 @@ export default function Home() {
   const [tokens, setTokens] = useState([])
   const [tokensTop, setTokensTop] = useState([])
   const [isToggled, setIsToggled] = useState(true);
+  let [chainId, setChainId] = useState(null);
+  let [key, setKey] = useState(null);
 
   const handleToggle = () => {
     setIsToggled((prev) => !prev);
@@ -37,17 +39,21 @@ export default function Home() {
 
   async function loadBlockchainData() {
     if (typeof window.ethereum !== 'undefined') {
+      let key = Number(Object.keys(config)[0]);
+      setKey(key);
       const provider = new ethers.BrowserProvider(window.ethereum)
       setProvider(provider)
+      const networkUser = await provider.getNetwork();
+      let chainId = Number(networkUser.chainId);
+      setChainId(chainId);
+
     }
     
     const rpcUrl = process.env.NEXT_PUBLIC_INFURA_RPC_URL;
     const providerRead = new ethers.JsonRpcProvider(rpcUrl);
     
-    console.log("Provider Read:", providerRead);
     const network = await providerRead.getNetwork()
     const factoryAddress = config[network.chainId].factory.address
-    console.log("Factory Address:", factoryAddress);
     const factory = new ethers.Contract(factoryAddress, Factory, providerRead)
     setFactory(factory)
 
@@ -120,11 +126,13 @@ export default function Home() {
         <div className="create">
           <button onClick={factory && account && toggleCreate} className="btn--fancy">
             {!factory ? (
-              "[ conecta la billetera para crear meme monedas y hacer trading ]"
+              "[ conecta la billetera en red Base para crear meme monedas y hacer trading ]"
             ) : !account ? (
-              "[ conecta la billetera para crear meme monedas y hacer trading ]"
+              "[ conecta la billetera en red Base para crear meme monedas y hacer trading ]"
+            ) : chainId != key ? (
+              "[ conecta la billetera en red Base para crear meme monedas y hacer trading ]"
             ) : (
-              "[ crea una meme moneda ]"
+              "[ crear meme moneda ]"
             )}
           </button>
         </div>
@@ -148,6 +156,7 @@ export default function Home() {
                     token={token}
                     key={index}
                     account={account}
+                    chainId={chainId}
                   />
                 ))
               )}
@@ -166,6 +175,7 @@ export default function Home() {
                     token={token}
                     key={index}
                     account={account}
+                    chainId={chainId}
                   />
                 ))
               )}
@@ -174,7 +184,13 @@ export default function Home() {
 
         <div className="create">
           {!account ? (
-            <p>conecta tu billetera para ver todas las monedas</p>
+            <button className="btn--fancy">
+              [ conecta tu billetera en red Base para ver todas las monedas ]
+            </button>
+          ) : chainId != key ? (
+            <button className="btn--fancy">
+              [ conecta tu billetera en red Base para ver todas las monedas ]
+            </button>
           ) : (
             <button onClick={openInNewTab} className="btn--fancy">
               [ ver todas las monedas ]

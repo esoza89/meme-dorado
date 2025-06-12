@@ -1,12 +1,14 @@
 "use client"
 
-import { ethers } from "ethers"
+import { ethers } from "ethers";
 import Image from 'next/image';
+import config from '../config.json';
 
-function Token({ token, account }) {
+function Token({ token, account, chainId }) {
 
   const openInNewTab = () => {
-    if (account) {
+    let key = Number(Object.keys(config)[0]);
+    if (account && chainId && chainId === key) {
       const tokenFid = token.fId
       localStorage.setItem('tradeData', JSON.stringify({tokenFid}));
       window.open('/Trade', '_blank', 'noopener,noreferrer');
