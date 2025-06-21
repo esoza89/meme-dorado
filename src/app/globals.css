@@ -327,3 +327,13 @@ main .listings h1 {
   background-color: #f44336;
   color: white;
 }
+
+.search-bar {
+  padding: 8px;
+  margin: 10px 0;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 22px; /* larger font */
+}

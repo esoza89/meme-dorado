@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react"
 import { ethers } from 'ethers'
 
-
 // Components
 import Header from "../components/Header"
 import Token from "../components/Token"
@@ -16,8 +15,8 @@ const ListaPage = ()=> {
 
   const [account, setAccount] = useState(null)
   const [tokens, setTokens] = useState([])
-  const [isToggled, setIsToggled] = useState(true);  
-
+  const [isToggled, setIsToggled] = useState(true)
+  const [searchQuery, setSearchQuery] = useState("")  // NEW STATE
 
   const handleToggle = () => {
     setIsToggled((prev) => !prev);
@@ -38,7 +37,7 @@ const ListaPage = ()=> {
       const totalTokensNumber = Number(totalTokens)
       console.log(`total tokens ${totalTokens}`)
       const tokens = []
-      
+
       for (let i = totalTokensNumber-1; i >= 0; i--) {
         const tokenSale = await factory.getTokenSale(i)
 
@@ -59,12 +58,11 @@ const ListaPage = ()=> {
           image: imageLink,
           fId: i
         }
-      
+
         tokens.push(token)
       }
 
       setTokens(tokens)
-
     }
   }
 
@@ -77,12 +75,17 @@ const ListaPage = ()=> {
     }
   }, [isToggled, tokens])
 
+  // Filter tokens based on searchQuery
+  const filteredTokens = tokens.filter(token =>
+    token.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="page">
       <Header account={account} setAccount={setAccount} />
 
       <main>
-      <div>
+        <div>
           <p>Actualizacion de memes</p>
           <button
             onClick={handleToggle}
@@ -94,26 +97,33 @@ const ListaPage = ()=> {
 
         <div className="listings">
           <h1>Lista maestra de monedas</h1>
-            <div className="tokens">
-              {!account ? (
-                <p>conecta la cuenta</p>
-              ) : tokens.length === 0 ? (
-                <p>cargando ...</p>
-              ) : (
-                tokens.map((token, index) => (
-                  <Token
-                    token={token}
-                    key={index}
-                  />
-                ))
-              )}
-            </div>
+
+          {/* Search bar */}
+          <input
+            type="text"
+            placeholder="Buscar por nombre..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-bar" // Add your styles
+          />
+
+          <div className="tokens">
+            {!account ? (
+              <p>Conectando la cuenta...</p>
+            ) : (
+              filteredTokens.map((token, index) => (
+                <Token
+                  token={token}
+                  key={index}
+                />
+              ))
+            )}
+          </div>
         </div>
 
       </main>
-
     </div>
-  );
+  )
 }
 
 export default ListaPage;
