@@ -19,11 +19,10 @@ const AcercaPage = () => {
                 <p className="token__details">
                     En meme dorado, la seguridad es primordial. Utilizamos <strong>contratos inteligentes</strong> que son como programas informáticos que se ejecutan en la cadena de bloques. Estos contratos están diseñados para ser transparentes, seguros e inmutables, asegurando que todas las transacciones se realicen según las reglas establecidas, sin necesidad de intermediarios.
                 </p>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/KOipfCT1K84?si=p5eNeK2KWkPM-yBN" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                 <ul className="token__details">
-                    <li><strong>Puedes verificar el contrato inteligente en:</strong>  <a href="https://basescan.org/address/0xc9A2ECa2943F5c5182a8fcc9B25E918B3abAc8Fc#code" className="text-blue-600 underline" target="_blank" rel="noopener noreferrer">Contrato en Basescan</a></li>
+                  <li><strong>Puedes verificar el contrato inteligente en:</strong>  <a href="https://basescan.org/address/0xc9A2ECa2943F5c5182a8fcc9B25E918B3abAc8Fc#code" className="text-blue-600 underline" target="_blank" rel="noopener noreferrer">Contrato en Basescan</a></li>
                 </ul>
-
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/KOipfCT1K84?si=p5eNeK2KWkPM-yBN" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                 <h2 className="text-2xl font-bold mb-4">💰 Proceso de Fondeo y Lanzamiento en Uniswap</h2>
                 <ul className="token__details">
                     <li><strong>Fondeo Inicial:</strong> Para comenzar, puedes crear tu propia meme moneda, tras lo cual el creador podra comprar temprano tokens de su creacion. Tambien puedes adquirir tokens existentes. Esto se hace enviando ETH al contrato inteligente, que te devolverá la cantidad correspondiente de tokens.</li>

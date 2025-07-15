@@ -65,7 +65,7 @@ export default function Home() {
     const tokens = []
     const startIndex = totalTokensNumber - 1
     
-    for (let i = startIndex; i >= 0 && i >= totalTokensNumber - 25; i--) {
+    for (let i = startIndex; i >= 0 && i >= totalTokensNumber - 56; i--) {
       const tokenSale = await factory.getTokenSale(i)
 
       const response = await fetch(`/api/coins/${i}`);
