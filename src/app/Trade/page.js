@@ -241,7 +241,7 @@ const TradePage = ()=> {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image src={token.image} alt="token image" width={250} height={250} />
+          <Image src={token.image} alt="token image" width={250} />
         </a>
         <p>creado por {token.creator.slice(0, 6) + '...' + token.creator.slice(38, 42)}</p>
         <p>{token.crtMsg}</p>
