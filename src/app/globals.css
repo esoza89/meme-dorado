@@ -136,7 +136,7 @@ main .listings h1 {
 
 .tokens {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 0));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1em;
   place-content: center;
   text-align: center;
