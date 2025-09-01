@@ -136,10 +136,17 @@ main .listings h1 {
 
 .tokens {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(0px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* fix */
   gap: 1em;
   place-content: center;
   text-align: center;
+}
+
+.tokens img {
+  width: 100%;        /* make each image fill its grid cell */
+  height: auto;       /* keep aspect ratio */
+  display: block;     /* removes inline gaps */
+  border-radius: 8px; /* optional, makes corners rounded */
 }
 
 .tokens p {
