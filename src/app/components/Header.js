@@ -29,14 +29,16 @@ function Header({ account, setAccount }) {
       <p className="brand">meme dorado</p>
       <div className="create">
           <button onClick={openAcerca} className="btn--fancy">
-            {t("about")}
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
+            {t('about')}
           </button>
         </div>
 
       { account ? (
         <button className="btn--fancy">[ {account.slice(0, 6) + '...' + account.slice(38, 42)} ]</button>
       ) : (
-        <button onClick={connectHandler} className="btn--fancy">{t("connect")}</button>
+        /* eslint-disable-next-line react/no-unescaped-entities */
+        <button onClick={connectHandler} className="btn--fancy">{t('connect')}</button>
       )}
       
     </header>

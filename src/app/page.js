@@ -132,24 +132,29 @@ export default function Home() {
             className="btn--fancy"
           >
             {!factory || !account || chainId != key
-              ? t("connectWallet") : t("create")}
+              /* eslint-disable-next-line react/no-unescaped-entities */
+              ? t('connectWallet') : t('create')}
           </button>
         </div>
         <div>
-          <p>{t("update")}</p>
+          {/* eslint-disable-next-line react/no-unescaped-entities */}
+          <p>{t('update')}</p>
           <button
             onClick={handleToggle}
             className={`toggle-button ${isToggled ? 'on' : 'off'}`}
           >
-            {isToggled ? t("on") : t("off")}
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
+            {isToggled ? t('on') : t('off')}
           </button>
         </div>
 
         <div className="listings">
-          <h1>{t("hot")}</h1>
+          {/* eslint-disable-next-line react/no-unescaped-entities */}
+          <h1>{t('hot')}</h1>
             <div className="tokens">
               {tokens.length === 0 ? (
-                <p>t("loading")</p>
+                /* eslint-disable-next-line react/no-unescaped-entities */
+                <p>{t('loading')}</p>
               ) : (tokensTop.map((token, index) => (
                   <Token
                     token={token}
@@ -164,10 +169,12 @@ export default function Home() {
 
 
         <div className="listings">
-          <h1>{t("new")}</h1>
+          {/* eslint-disable-next-line react/no-unescaped-entities */}
+          <h1>{t('new')}</h1>
             <div className="tokens">
               {tokens.length === 0 ? (
-                <p>t("loading")</p>
+                /* eslint-disable-next-line react/no-unescaped-entities */
+                <p>{t('loading')}</p>
               ) : (
                 tokens.map((token, index) => (
                   <Token
@@ -184,11 +191,13 @@ export default function Home() {
         <div className="create">
          {!account || chainId !== key ? (
           <button className="btn--fancy">
-            t("walletToAll")
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
+            {t('walletToAll')}
           </button>
           ) : (
             <button onClick={openInNewTab} className="btn--fancy">
-              t("all")
+              {/* eslint-disable-next-line react/no-unescaped-entities */}
+              {t('all')}
             </button>
           )}
         </div>
