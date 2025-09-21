@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { ethers } from 'ethers'
+import {useTranslations} from 'next-intl';
 
 // Components
 import Header from "./components/Header"
@@ -24,6 +25,8 @@ export default function Home() {
   const [isToggled, setIsToggled] = useState(true);
   let [chainId, setChainId] = useState(null);
   let [key, setKey] = useState(null);
+
+  const t = useTranslations('home');
 
   const handleToggle = () => {
     setIsToggled((prev) => !prev);
@@ -124,33 +127,30 @@ export default function Home() {
 
       <main>
         <div className="create">
-          <button onClick={factory && account && toggleCreate} className="btn--fancy">
-            {!factory ? (
-              "[ conecta la billetera en red Base para crear meme monedas y hacer trading ]"
-            ) : !account ? (
-              "[ conecta la billetera en red Base para crear meme monedas y hacer trading ]"
-            ) : chainId != key ? (
-              "[ conecta la billetera en red Base para crear meme monedas y hacer trading ]"
-            ) : (
-              "[ crear meme moneda ]"
-            )}
+          <button
+            onClick={factory && account && toggleCreate}
+            className="btn--fancy"
+          >
+            {!factory || !account || chainId != key
+              ? t('connectWallet')
+              : t('create')}
           </button>
         </div>
         <div>
-          <p>Actualizacion de memes</p>
+          <p>{t('update')}</p>
           <button
             onClick={handleToggle}
             className={`toggle-button ${isToggled ? 'on' : 'off'}`}
           >
-            {isToggled ? 'Enc' : 'Apag'}
+            {isToggled ? t('on') : t('off')}
           </button>
         </div>
 
         <div className="listings">
-          <h1>monedas en tendencia</h1>
+          <h1>{t('hot')}</h1>
             <div className="tokens">
               {tokens.length === 0 ? (
-                <p>cargando...</p>
+                <p>t('loading')</p>
               ) : (tokensTop.map((token, index) => (
                   <Token
                     token={token}
@@ -165,10 +165,10 @@ export default function Home() {
 
 
         <div className="listings">
-          <h1>nuevas monedas</h1>
+          <h1>{t('new')}</h1>
             <div className="tokens">
               {tokens.length === 0 ? (
-                <p>cargando...</p>
+                <p>t('loading')</p>
               ) : (
                 tokens.map((token, index) => (
                   <Token
@@ -183,20 +183,15 @@ export default function Home() {
         </div>
 
         <div className="create">
-          {!account ? (
-            <button className="btn--fancy">
-              [ conecta tu billetera en red Base para ver todas las monedas ]
-            </button>
-          ) : chainId != key ? (
-            <button className="btn--fancy">
-              [ conecta tu billetera en red Base para ver todas las monedas ]
-            </button>
+         {!account || chainId !== key ? (
+          <button className="btn--fancy">
+            t('walletToAll')
+          </button>
           ) : (
             <button onClick={openInNewTab} className="btn--fancy">
-              [ ver todas las monedas ]
+              t('all')
             </button>
           )}
-          
         </div>
 
       </main>

@@ -1,0 +1,45 @@
+{
+    "home": {
+        "about": "[About]",
+        "connect": "[connect]",
+        "connectWallet": "connect your wallet on Base to create and trade memecoins",
+        "create": "[create memecoin]",
+        "update": "Meme updates",
+        "on": "on",
+        "off": "off",
+        "hot": "trending coins",
+        "loading": "loading...",
+        "new": "new memes",
+        "walletToAll": "connect your wallet on Base to see all coins",
+        "all": "[all coins]"
+    },
+
+    "tokenDetails": {
+        "created": "created by",
+        "cap": "market cap"
+    },
+
+    "createComponent": {
+        "create2": "create a meme coin",
+        "comission": "Commission",
+        "name": "name",
+        "symbol": "symbol",
+        "message": "message from creator",
+        "social1": "social network (optional)",
+        "social2": "social network 2 (optional)",
+        "create3": "create",
+        "cancel": "cancel"
+    },
+
+"tradeComponent": {
+        "price": "base price",
+        "buy": "buy",
+        "buy2": "buy",
+        "sell": "sell",
+        "sell2": "sell",
+        "progress": "sales progress",
+        "sales": "sales",
+        "reserves": "reserves",
+        "trades": "last trades"
+    }
+}

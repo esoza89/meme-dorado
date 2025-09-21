@@ -1,6 +1,10 @@
 import { ethers } from "ethers"
+import {useTranslations} from 'next-intl';
+
 
 function Header({ account, setAccount }) {
+
+  const t = useTranslations('home');
 
   const openAcerca = () => {
     window.open('/Acerca', '_blank', 'noopener,noreferrer');
@@ -25,14 +29,14 @@ function Header({ account, setAccount }) {
       <p className="brand">meme dorado</p>
       <div className="create">
           <button onClick={openAcerca} className="btn--fancy">
-            [Acerca de]
+            {t('about')}
           </button>
         </div>
 
       { account ? (
         <button className="btn--fancy">[ {account.slice(0, 6) + '...' + account.slice(38, 42)} ]</button>
       ) : (
-        <button onClick={connectHandler} className="btn--fancy">[conectar]</button>
+        <button onClick={connectHandler} className="btn--fancy">{t('connect')}</button>
       )}
       
     </header>

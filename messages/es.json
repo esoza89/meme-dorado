@@ -1,0 +1,45 @@
+{
+    "home": {
+        "about": "[Acerca de]",
+        "connect": "[conectar]",
+        "connectWallet": "conecta tu billetera en Base para crear y comerciar memecoins",
+        "create": "[crear meme moneda]",
+        "update": "actualizacion de memes",
+        "on": "Enc",
+        "off": "Apag",
+        "hot": "monedas de tendencia",
+        "loading": "cargando...",
+        "new": "nuevas monedas",
+        "walletToAll": "conecta tu billetera en Base para ver todas las monedas",
+        "all": "[todas las monedas]"
+    },
+
+    "tokenDetails": {
+        "created": "creado por",
+        "cap": "capitalizacion"
+    },
+
+    "createComponent": {
+        "create2": "crear una meme moneda",
+        "comission": "Comision",
+        "name": "nombre",
+        "symbol": "simbolo",
+        "message": "mensaje del creador",
+        "social1": "red social (opcional)",
+        "social2": "red social 2 (opcional)",
+        "create3": "crear",
+        "cancel": "cancelar"
+    },
+
+"tradeComponent": {
+        "price": "precio base",
+        "buy": "comprar",
+        "buy2": "comprar",
+        "sell": "vender",
+        "sell2": "vender",
+        "progress": "progreso de ventas",
+        "sales": "ventas",
+        "reserves": "reservas",
+        "trades": "ultimos trades"
+    }
+}
