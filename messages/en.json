@@ -24,11 +24,14 @@
         "comission": "Commission",
         "name": "name",
         "symbol": "symbol",
+        "loadingImg": "uploading image...",
+        "imgLoaded": "image uploaded ✅",
+        "loadImg": "upload image",
         "message": "message from creator",
         "social1": "social network (optional)",
         "social2": "social network 2 (optional)",
-        "create3": "create",
-        "cancel": "cancel"
+        "create3": "[ create ]",
+        "cancel": "[ cancel ]"
     },
 
 "tradeComponent": {

@@ -1,6 +1,7 @@
 'use client'
 import { ethers } from "ethers"
 import { useState } from "react"
+import {useTranslations} from 'next-intl';
 
 
 function List({ toggleCreate, fee, provider, factory }) {
@@ -9,6 +10,9 @@ function List({ toggleCreate, fee, provider, factory }) {
   const [uploading, setUploading] = useState(false);
 
   const [toastC, setToastC] = useState(null);
+
+  const t = useTranslations('createComponent');
+
 
   const uploadFile = async () => {
     try {
@@ -91,31 +95,35 @@ function List({ toggleCreate, fee, provider, factory }) {
 
   return (
     <div className="list">
-      <h2>Crear una meme moneda</h2>
+      {/* eslint-disable-next-line react/no-unescaped-entities */}
+      <h2>{t('create2')}</h2>
 
       <div className="list_description">
-        <p>Comision: {ethers.formatUnits(fee, 18)} ETH</p>
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
+        <p>{t('comission')}: {ethers.formatUnits(fee, 18)} ETH</p>
       </div>
 
       <form action={listHandler}>
-        <input type="text" name="name" placeholder="nombre" />
-        <input type="text" name="symbol" placeholder="simbolo" />
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
+        <input type="text" name="name" placeholder={t('name')} />
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
+        <input type="text" name="symbol" placeholder={t('symbol')} />
         <input type="file" onChange={handleChange} />
         <button type="button" disabled={uploading} onClick={uploadFile}>
-          {uploading 
-            ? "Cargando..." 
-            : url 
-            ? "Imagen cargada ✅" 
-            : "Cargar imagen"
-        }
+          {/* eslint-disable-next-line react/no-unescaped-entities */}
+          {uploading ? t('loadingImg') : url ? t('imgLoaded') : t('loadImg')}
         </button>
-        <input type="text" name="creatorMessage" placeholder="mensaje del creador" />
-        <input type="text" name="rSocial1" placeholder="red social (opcional)" />
-        <input type="text" name="rSocial2" placeholder="red social 2 (opcional)" />
-        <input type="submit" value="[ Crear ]" />
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
+        <input type="text" name="creatorMessage" placeholder={t('message')} />
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
+        <input type="text" name="rSocial1" placeholder={t('social1')} />
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
+        <input type="text" name="rSocial2" placeholder={t('social2')} />
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
+        <input type="submit" value={t('create3')} />
       </form>
-
-      <button onClick={toggleCreate} className="btn--fancy">[ cancelar ]</button>
+      {/* eslint-disable-next-line react/no-unescaped-entities */}
+      <button onClick={toggleCreate} className="btn--fancy">{t('cancel')}</button>
       {toastC && (
         <div className="toast">
           {toastC}
