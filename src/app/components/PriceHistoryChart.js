@@ -14,6 +14,9 @@ import {
   Legend,
 } from 'chart.js';
 
+import { useTranslations } from 'next-intl';
+
+
 // Register the necessary Chart.js components
 ChartJS.register(
   CategoryScale,
@@ -26,13 +29,15 @@ ChartJS.register(
 );
 
 const PriceHistoryChart = ({ prices }) => {
+  const t = useTranslations('createComponent');
+
   const chartRef = useRef(null);
   const labels = prices.map((_, index) => `T-${prices.length - index}`);
   const data = {
     labels,
     datasets: [
       {
-        label: 'Precio',
+        label: t('price2'),
         data: prices,
         fill: false,
         borderColor: 'rgb(255, 191, 0.82)',
@@ -51,7 +56,7 @@ const PriceHistoryChart = ({ prices }) => {
         },
         title: {
             display: true,
-            text: 'Ultimos trades',
+            text: t('trades'),
             color: 'orange',
             font: {
             size: 16,

@@ -34,8 +34,9 @@
         "cancel": "[ cancel ]"
     },
 
-"tradeComponent": {
+    "tradeComponent": {
         "price": "base price",
+        "price2": "price",
         "buy": "buy",
         "buy2": "buy",
         "sell": "sell",
