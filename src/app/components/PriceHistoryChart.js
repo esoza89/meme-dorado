@@ -29,7 +29,7 @@ ChartJS.register(
 );
 
 const PriceHistoryChart = ({ prices }) => {
-  const t = useTranslations('createComponent');
+  const t = useTranslations('tradeComponent');
 
   const chartRef = useRef(null);
   const labels = prices.map((_, index) => `T-${prices.length - index}`);

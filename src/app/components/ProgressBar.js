@@ -11,6 +11,8 @@ import {
   Legend,
 } from 'chart.js';
 
+import { useTranslations } from 'next-intl';
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -21,20 +23,21 @@ ChartJS.register(
 );
 
 const ProgressBar = ({ currentSales, currentTarget }) => {
+    const t = useTranslations('tradeComponent');
     const sold = Number(currentSales)
     const target = Number(currentTarget)
     const percentage = ((sold / target) * 100).toFixed(8);
 
     const data = {
-        labels: ['Progreso de ventas'],
+        labels: [t('progress')],
         datasets: [
             {
-                label: 'Ventas',
+                label: t('sales'),
                 data: [sold],
                 backgroundColor: 'rgba(255, 191, 0, 0.82)',
             },
             {
-                label: 'Reservas',
+                label: t('reserves'),
                 data: [target - sold],
                 backgroundColor: 'rgba(110, 110, 112, 0.6)',
             },
@@ -48,7 +51,7 @@ const ProgressBar = ({ currentSales, currentTarget }) => {
     plugins: {
       title: {
         display: true,
-        text: `Progreso de ventas: ${percentage}%`,
+        text: `${t('progress')}: ${percentage}%`,
         color: 'orange',
         font: {
           size: 16,
