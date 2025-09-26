@@ -15,8 +15,8 @@
     },
 
     "tokenDetails": {
-        "created": "created by",
-        "cap": "market cap"
+        "created": "created by: ",
+        "cap": "market cap: "
     },
 
     "createComponent": {
