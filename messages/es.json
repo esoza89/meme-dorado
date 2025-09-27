@@ -35,15 +35,25 @@
     },
 
     "tradeComponent": {
+        "trade": "trade",
+        "created": "creado por ",
+        "cap": "capitalizacion: ",
         "price": "precio base",
+        "target": "¡objetivo alcanzado!",
+        "uniswap": "ver en uniswap",
         "price2": "precio",
         "buy": "comprar",
-        "buy2": "comprar",
+        "buy2": "[ comprar ]",
         "sell": "vender",
         "sell2": "vender",
         "progress": "progreso de ventas",
         "sales": "ventas",
         "reserves": "reservas",
-        "trades": "ultimos trades"
+        "trades": "ultimos trades",
+        "toastT": "No hay suficientes tokens en existencia",
+        "toastE": "No hay suficiente ETH en la billetera",
+        "toastP": "Procesando transaccion...",
+        "toastS": "No hay suficientes tokens vendidos",
+        "toastSt": "No hay suficientes tokens disponibles para vender"
     }
 }

@@ -8,8 +8,7 @@ import Factory from "../abis/Factory.json"
 import ProgressBar from "../components/ProgressBar"
 import PriceHistoryChart from '../components/PriceHistoryChart';
 import Image from 'next/image';
-
-
+import {useTranslations} from 'next-intl';
 
 const TradePage = ()=> {
   const [target, setTarget] = useState(0)
@@ -27,6 +26,7 @@ const TradePage = ()=> {
   const [factory, setFactory] = useState(null)
   const [isLoading, setIsLoading] = useState(true);
   const [priceHistory, setPriceHistory] = useState([]);
+  const t = useTranslations('tradeComponent');
 
   const stimateCostB = async (event) => {
     setAmountBValue(event.target.value)
@@ -47,7 +47,7 @@ const TradePage = ()=> {
     const amountB = ethers.parseUnits(form.get("amountB"), 18)
 
     if(token.sold + amountB > limit) {
-      setToastB("No hay suficientes tokens en existencia");
+      setToastB(t('toastT'));
       setTimeout(() => setToastB(null), 6000);
       return;
     }
@@ -58,7 +58,7 @@ const TradePage = ()=> {
     const totalCost = await factory.getCost(sold, amountB)
 
     if(userBalance < totalCost) {
-      setToastB("No cuentas con ETH suficiente");
+      setToastB(t('toastE'));
       setTimeout(() => setToastB(null), 6000);
       return;
     }
@@ -69,7 +69,7 @@ const TradePage = ()=> {
       { value: totalCost }
     )
 
-    setToastB("Procesando compra...");
+    setToastB(t('toastP'));
     setTimeout(() => setToastB(null), 6000);
 
     await transaction.wait()
@@ -96,7 +96,7 @@ const TradePage = ()=> {
     const amountS = ethers.parseUnits(form.get("amountS"), 18)
 
     if(token.sold - amountS < 0 ) {
-      setToastS("No hay suficientes tokens vendidos");
+      setToastS(t('toastS'));
       setTimeout(() => setToastS(null), 6000);
       return;
     }
@@ -105,7 +105,7 @@ const TradePage = ()=> {
 
     const userBalance = await factory.balances(token.token, signer)
     if(userBalance < amountS) {
-      setToastS("No tienes suficientes tokens para vender");
+      setToastS(t('toastSt'));
       setTimeout(() => setToastS(null), 6000);
       return;
     }
@@ -133,7 +133,7 @@ const TradePage = ()=> {
       amountS
     )
 
-    setToastS("Procesando venta...");
+    setToastS(t('toastP'));
     setTimeout(() => setToastS(null), 6000);
 
     await transaction.wait()
@@ -233,7 +233,8 @@ const TradePage = ()=> {
 
   return (
     <div className="trade">
-      <h1>trade</h1>
+      {/* eslint-disable-next-line react/no-unescaped-entities */}
+      <h1>{t('trade')}</h1>
 
       <div className="token__details">
         <a
@@ -243,10 +244,13 @@ const TradePage = ()=> {
         >
           <Image src={token.image} alt="token image" width={250} />
         </a>
-        <p>creado por {token.creator.slice(0, 6) + '...' + token.creator.slice(38, 42)}</p>
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
+        <p>{t('created')} {token.creator.slice(0, 6) + '...' + token.creator.slice(38, 42)}</p>
         <p>{token.crtMsg}</p>
-        <p>Market Cap: {Number(ethers.formatUnits(token.raised, 18)).toFixed(18)} ETH</p>
-        <p>Precio base: {ethers.formatUnits(price, 18)} ETH</p>
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
+        <p>{t('cap')}{Number(ethers.formatUnits(token.raised, 18)).toFixed(18)} ETH</p>
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
+        <p>{t('price')}{ethers.formatUnits(price, 18)} ETH</p>
         <p>
           <a 
             href={`${token.rSocial1}`} 
@@ -270,25 +274,29 @@ const TradePage = ()=> {
 
       {token.sold >= limit || token.raised >= target ? (
         <div>
-          <p className="disclaimer">¡Objetivo alcanzado!</p>
+          {/* eslint-disable-next-line react/no-unescaped-entities */}
+          <p className="disclaimer">{t('target')}</p>
           <p>
               <a 
                 href={`https://app.uniswap.org/explore/tokens/base/${token.token}`} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="link"
-              >   
-              Ver en Uniswap
+              >
+              {/* eslint-disable-next-line react/no-unescaped-entities */}
+              {t('uniswap')}
               </a>
           </p>
         </div>
       ) : (
         <div>
           <div style={{ display: 'flex', gap: '20px' }}>
-            <h3>Compra</h3>
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
+            <h3>{t('buy')}</h3>
             <form action={buyHandler}>
               <input type="number" name="amountB" min={1} max={limit} placeholder="1" value={amountBValue} onChange={stimateCostB}/>
-              <input type="submit" value="[ comprar ]" />
+              {/* eslint-disable-next-line react/no-unescaped-entities */}
+              <input type="submit" value={t('buy2')} />
             </form>
             <div className="trade__cost">
               <p>{Number(ethers.formatUnits(totalCostB, 18)).toFixed(18)} ETH</p>
@@ -300,10 +308,12 @@ const TradePage = ()=> {
             )}
           </div>
           <div style={{ display: 'flex', gap: '20px' }}>
-            <h3>Vende</h3>
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
+            <h3>{t('sell')}</h3>
             <form action={sellHandler}>
               <input type="number" name="amountS" min={1} max={limit} placeholder="1" value={amountSValue} onChange={stimateCostS}/>
-              <input type="submit" value="[ vender ]" />
+              {/* eslint-disable-next-line react/no-unescaped-entities */}
+              <input type="submit" value={t('sell2')} />
             </form>
             <div className="trade__cost">
               <p>{Number(ethers.formatUnits(totalCostS, 18)).toFixed(18)} ETH</p>

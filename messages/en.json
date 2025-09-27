@@ -35,15 +35,25 @@
     },
 
     "tradeComponent": {
+        "trade": "trade",
+        "created": "created by ",
+        "cap": "market cap: ",
         "price": "base price",
+        "target": "funding target reached!",
+        "uniswap": "see on uniswap",
         "price2": "price",
         "buy": "buy",
-        "buy2": "buy",
+        "buy2": "[ buy ]",
         "sell": "sell",
-        "sell2": "sell",
+        "sell2": "[ sell ]",
         "progress": "sales progress",
         "sales": "sales",
         "reserves": "reserves",
-        "trades": "last trades"
+        "trades": "last trades",
+        "toastT": "Not enough existing tokens",
+        "toastE": "Not enough ETH in wallet",
+        "toastP": "Processing transaction...",
+        "toastS": "Not enough tokens sold",
+        "toastSt": "Not enough tokens available to sell"
     }
 }
