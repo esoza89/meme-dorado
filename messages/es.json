@@ -36,9 +36,11 @@
 
     "tradeComponent": {
         "trade": "trade",
+        "loading":"Cargando moneda...",
+        "notFound":"Moneda no encontrada",
         "created": "creado por ",
         "cap": "capitalizacion: ",
-        "price": "precio base",
+        "price": "precio base ",
         "target": "¡objetivo alcanzado!",
         "uniswap": "ver en uniswap",
         "price2": "precio",

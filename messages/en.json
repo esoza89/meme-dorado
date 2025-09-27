@@ -36,9 +36,11 @@
 
     "tradeComponent": {
         "trade": "trade",
+        "loading": "Loading token...",
+        "notFound": "Token not found",
         "created": "created by ",
         "cap": "market cap: ",
-        "price": "base price",
+        "price": "base price ",
         "target": "funding target reached!",
         "uniswap": "see on uniswap",
         "price2": "price",

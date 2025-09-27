@@ -224,11 +224,11 @@ const TradePage = ()=> {
   }, []);
 
   if (isLoading) {
-    return <div>Cargando moneda...</div>;
+    return <div>{t('loading')}</div>;
   }
   
   if (!token) {
-    return <div>Token no encontrado</div>;
+    return <div>{t('notFound')}</div>;
   }
 
   return (
